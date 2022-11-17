@@ -9,8 +9,9 @@ function App() {
     {
       name: 'Тестовое задание1',
       description: 'Сделать ToDoList согласно ТЗ',
-      deadline: '18:00 18.11.2022',
-      progress: '++',
+      time: '18:00',
+      date: '2022-11-17',
+      progress: false,
       id: 1
     }
   ]);
@@ -27,11 +28,21 @@ function App() {
       name: name,
       description: description,
       deadline: deadline,
-      progress: null,
+      progress: false,
       id: maxId
     }
 
     const newArr = [...data, newItem]
+    setData(newArr);
+  }
+
+  const onToogleProp = (id, prop) => {
+    const newArr = data.map(item => {
+      if (item.id === id) {
+        return {...item, [prop]: !item[prop]}
+      }
+      return item;
+    })
     setData(newArr);
   }
 
@@ -45,7 +56,8 @@ function App() {
           onAdd={addItem} />
         <TasksTable 
           data={data}
-          onDelete={deleteItem} />
+          onDelete={deleteItem}
+          onToogleProp={onToogleProp} />
       </main>
     </div>
   );

@@ -2,3 +2,14 @@ td {
     border: 1px solid black;
     padding: 5px;
 }
+
+td div {
+    display: flex;
+    justify-content: space-evenly;
+    border: none;
+    /* border-bottom: 1px solid black; */
+}
+
+.active {
+    background-color: rgb(108, 108, 116);
+}

@@ -1,14 +1,15 @@
 import TasksTableItem from '../tasksTableItem/TasksTableItem';
 import './TaskTable.css';
 
-const TaskTable = ({data, onDelete}) => {
+const TaskTable = ({data, onDelete, onToogleProp}) => {
     const elements = data.map(item => {
         const {id, ...itemProps} = item;
         return (
             <TasksTableItem 
                 key={id}
                 {...itemProps}
-                onDelete={() => onDelete(id)} />
+                onDelete={() => onDelete(id)}
+                onToogleProp={(e) => onToogleProp(id, e.currentTarget.getAttribute('data-toogle'))} />
         );
     });
 
