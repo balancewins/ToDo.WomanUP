@@ -1,12 +1,15 @@
 import './TasksTableItem.css';
 
-const TasksTableItem = () => {
+const TasksTableItem = ({name, description, deadline, progress, onDelete}) => {
     return (
         <tr>
-            <td>Тестовое задание</td>
-            <td>Сделать ToDoList согласно ТЗ</td>
-            <td>18.11.2022</td>
-            <td>В работе</td>
+            <td>{name}</td>
+            <td>{description}</td>
+            <td>{deadline}</td>
+            <td>
+                {progress}
+                <button onClick={onDelete}>Удалить</button>
+            </td>
         </tr>
     );
 }
