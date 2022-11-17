@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Header from '../headerLogo/HeaderLogo';
-import TaskAddForm from '../tasksAddForm/TasksAddForm';
-import TaskTable from '../tasksTable/TaskTable';
+import TasksAddForm from '../tasksAddForm/TasksAddForm';
+import TasksTable from '../tasksTable/TaskTable';
 import './App.css';
 
 function App() {
@@ -41,9 +41,9 @@ function App() {
         <Header />
       </header>
       <main className="App-main">
-        <TaskAddForm 
+        <TasksAddForm 
           onAdd={addItem} />
-        <TaskTable 
+        <TasksTable 
           data={data}
           onDelete={deleteItem} />
       </main>
