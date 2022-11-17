@@ -1,0 +1,14 @@
+.tasks-list {
+    margin: auto;
+    margin-top: 15px;
+    min-width: 1000px;
+    max-width: 1000px;
+    border: 2px solid black;
+    padding: 5px;
+    border-collapse: collapse;
+}
+
+.tasks-list th {
+    border: 1px solid black;
+    padding: 5px;
+}
