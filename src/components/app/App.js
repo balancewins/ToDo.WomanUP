@@ -12,6 +12,7 @@ function App() {
       time: '18:00',
       date: '2022-11-17',
       progress: false,
+      files: null,
       id: 1
     }
   ]);
@@ -22,13 +23,15 @@ function App() {
     setData(data.filter(item => item.id !== id));
   }
 
-  const addItem = (name, description, deadline) => {
+  const addItem = (name, description, time, date, files) => {
     setMaxId(maxId + 1);
     const newItem = {
       name: name,
       description: description,
-      deadline: deadline,
+      time: time,
+      date: date,
       progress: false,
+      files: null,
       id: maxId
     }
 

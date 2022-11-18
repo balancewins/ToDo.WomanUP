@@ -2,15 +2,16 @@ import './TasksAddForm.css';
 
 const TaskAddFormControlled = ({onAdd}) => {
 
-    const deadline = (time, date) => {
-        const reverseDate = date.split('-').reverse().join('.');
-        return `${time} ${reverseDate}`
-    }
+    // const deadline = (time, date) => {
+    //     const reverseDate = date.split('-').reverse().join('.');
+    //     return `${time} ${reverseDate}`
+    // }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const {name, description, time, date} = e.target;
-        onAdd(name.value, description.value, deadline(time.value, date.value));
+        const {name, description, time, date, files} = e.target;
+        // onAdd(name.value, description.value, deadline(time.value, date.value));
+        onAdd(name.value, description.value, time.value, date.value)
         e.target.reset();
     }
 
@@ -26,6 +27,9 @@ const TaskAddFormControlled = ({onAdd}) => {
                    className="add-task__description" 
                    placeholder='Введите описание задачи'
                    required />
+            <input type="file"
+                   name="file"
+                   className='add-task__file' />
             <input type="time" 
                    name='time'
                    className="add-task__time"

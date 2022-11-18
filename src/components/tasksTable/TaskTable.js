@@ -21,6 +21,7 @@ const TaskTable = ({data, onDelete, onToogleProp}) => {
                     <th>Заголовок</th>
                     <th>Описание</th>
                     <th>Дата завершения</th>
+                    <th>Прикрепленные файлы</th>
                     <th>Прогресс</th>
                 </tr>
             </thead>
