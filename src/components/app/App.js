@@ -7,17 +7,26 @@ import './App.css';
 function App() {
   const [data, setData] = useState([
     {
-      name: 'Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание ',
-      description: 'Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ',
+      name: 'Тестовое задание ',
+      description: 'Сделать ToDoList согласно ТЗ',
       time: '18:00',
-      date: '2022-11-17',
+      date: '2022-11-19',
       progress: false,
       files: null,
       id: 1
+    },
+    {
+      name: 'Редактируемые поля',
+      description: 'Разобраться как сделать редактируемые поля',
+      time: '18:00',
+      date: '2022-11-20',
+      progress: false,
+      files: null,
+      id: 2
     }
   ]);
 
-  const [maxId, setMaxId] = useState(2);
+  const [maxId, setMaxId] = useState(3);
 
   const deleteItem = (id) => {
     setData(data.filter(item => item.id !== id));
