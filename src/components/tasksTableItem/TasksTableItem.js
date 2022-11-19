@@ -1,50 +1,48 @@
 // import { useState } from 'react';
+import Name from './tasksTableItemContent/Name';
+import Description from './tasksTableItemContent/Description';
+import Deadline from './tasksTableItemContent/Deadline';
+import Files from './tasksTableItemContent/Files';
+import Progress from './tasksTableItemContent/Progress';
 import './TasksTableItem.css';
 
 const TasksTableItem = ({name, description, time, date, files, progress, onDelete, onToogleProp}) => {
+
     if (!files) {
         files = 'Нет прикрепленных файлов';
     }
 
-    const checkDate = (time, date) => {
+    const checkDeadline = (time, date) => {
         return (new Date(`${date}T${time}`) - new Date())
     }
     
     let classNames = 'task';
-    if (checkDate(time, date) < 0) {
+    if (checkDeadline(time, date) < 0) {
         classNames += ' overdue-task';
     }
-    if (progress) {
-        if (checkDate(time, date) > 0) {
-            classNames += ' done-task'
-        } 
+
+    if (progress && checkDeadline(time, date) > 0) {
+        classNames += ' done-task'
     }
-    
+
     return (
         <tr className={classNames}>
-            <td>
-                <span data-toogle="name">{name}</span>
+            <td className='task-name'>
+                <Name name={name} />
             </td>
-            <td>
-                <span data-toogle="description">{description}</span>
+            <td className='task-description'>
+                <Description description={description} />
             </td>
-            <td>
-                <div>
-                    <span data-toogle="time">{time}</span>
-                    <span data-toogle="date">{date.split('-').reverse().join('.')}</span>
-                </div>
+            <td className='task-deadline'>
+                <Deadline deadline={[time, date]} />
             </td>
-            <td data-toogle="files">
-                {files}
+            <td className='task-files'>
+                <Files files={files} />
             </td>
-            <td>
-                <div>
-                    <label>
-                        <input type="checkbox" className="checkbox" data-toogle="progress" onChange={onToogleProp} defaultValue={progress} />
-                        Выполнено
-                    </label>
-                    <button className='delete-button' onClick={onDelete}>Удалить</button>
-                </div>
+            <td className='task-progress'>
+                <Progress progress={progress}
+                          onDelete={onDelete}
+                          onToogleProp={onToogleProp} />
             </td>
         </tr>
     );
