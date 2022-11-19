@@ -23,6 +23,8 @@ function App() {
     setData(data.filter(item => item.id !== id));
   }
 
+  
+
   const addItem = (name, description, time, date, files) => {
     setMaxId(maxId + 1);
     const newItem = {

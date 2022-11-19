@@ -1,8 +1,6 @@
-const Description = ({description}) => {
-
-
+const Description = ({description, WhoAmI}) => {
     return (
-        <span data-toogle="description">{description}</span>
+        <span data-toogle="description">{WhoAmI ? 'И тут меняется' : description}</span>
     );
 }
 

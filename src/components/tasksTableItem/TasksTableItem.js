@@ -19,8 +19,8 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
     const onEdit = (prop) => {
         const newArr = edit.map(item => {
             return {...item, [prop]: !item[prop]}
-          })
-          setEdit(newArr);
+        })
+        setEdit(newArr);
     }
 
     if (!files) {
@@ -44,21 +44,24 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
         <tr className={classNames}>
             <td className='task-name'>
                 <div>
-                    <Name name={name} />
+                    <Name name={name}
+                          WhoAmI={edit[0].name}/>
                     <EditButton toogle='name' 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
             <td className='task-description'>
                 <div>
-                    <Description description={description} />
+                    <Description description={description}
+                                 WhoAmI={edit[0].description} />
                     <EditButton toogle='description' 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
             <td className='task-deadline'>
                 <div>
-                    <Deadline deadline={[time, date]} />
+                    <Deadline deadline={[time, date]}
+                              WhoAmI={edit[0].deadline} />
                     <EditButton toogle='deadline' 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
