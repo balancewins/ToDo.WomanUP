@@ -7,8 +7,8 @@ import './App.css';
 function App() {
   const [data, setData] = useState([
     {
-      name: 'Тестовое задание1',
-      description: 'Сделать ToDoList согласно ТЗ',
+      name: 'Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание Тестовое задание ',
+      description: 'Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ Сделать ToDoList согласно ТЗ',
       time: '18:00',
       date: '2022-11-17',
       progress: false,

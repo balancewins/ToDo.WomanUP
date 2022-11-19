@@ -1,12 +1,27 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import Name from './tasksTableItemContent/Name';
 import Description from './tasksTableItemContent/Description';
 import Deadline from './tasksTableItemContent/Deadline';
 import Files from './tasksTableItemContent/Files';
 import Progress from './tasksTableItemContent/Progress';
+import EditButton from './tasksTableItemContent/EditButton';
 import './TasksTableItem.css';
 
 const TasksTableItem = ({name, description, time, date, files, progress, onDelete, onToogleProp}) => {
+    const [edit, setEdit] = useState([
+        {
+            name: false,
+            description: false,
+            deadline: false
+        }
+    ]);
+
+    const onEdit = (prop) => {
+        const newArr = edit.map(item => {
+            return {...item, [prop]: !item[prop]}
+          })
+          setEdit(newArr);
+    }
 
     if (!files) {
         files = 'Нет прикрепленных файлов';
@@ -28,21 +43,37 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
     return (
         <tr className={classNames}>
             <td className='task-name'>
-                <Name name={name} />
+                <div>
+                    <Name name={name} />
+                    <EditButton toogle='name' 
+                                onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
+                </div>
             </td>
             <td className='task-description'>
-                <Description description={description} />
+                <div>
+                    <Description description={description} />
+                    <EditButton toogle='description' 
+                                onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
+                </div>
             </td>
             <td className='task-deadline'>
-                <Deadline deadline={[time, date]} />
+                <div>
+                    <Deadline deadline={[time, date]} />
+                    <EditButton toogle='deadline' 
+                                onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
+                </div>
             </td>
             <td className='task-files'>
-                <Files files={files} />
+                <div>
+                    <Files files={files} />
+                </div>
             </td>
             <td className='task-progress'>
-                <Progress progress={progress}
-                          onDelete={onDelete}
-                          onToogleProp={onToogleProp} />
+                <div>
+                    <Progress progress={progress}
+                              onDelete={onDelete}
+                              onToogleProp={onToogleProp} />
+                </div>
             </td>
         </tr>
     );

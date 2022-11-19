@@ -17,12 +17,12 @@ const TaskTable = ({data, onDelete, onToogleProp}) => {
         <table className="tasks-list">
             <caption className="task-list__descr">Список задач:</caption>
             <thead>
-                <tr>
-                    <th>Заголовок</th>
-                    <th>Описание</th>
-                    <th>Дата завершения</th>
-                    <th>Прикрепленные файлы</th>
-                    <th>Прогресс</th>
+                <tr className='tasks-head'>
+                    <th className='task-name'>Заголовок</th>
+                    <th className='task-description'>Описание</th>
+                    <th className='task-deadline'>Дата завершения</th>
+                    <th className='task-files'>Прикрепленные файлы</th>
+                    <th className='task-progress'>Прогресс</th>
                 </tr>
             </thead>
             <tbody>
