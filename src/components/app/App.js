@@ -20,13 +20,22 @@ function App() {
       description: 'Разобраться как сделать редактируемые поля',
       time: '18:00',
       date: '2022-11-20',
-      progress: false,
+      progress: true,
       files: null,
       id: 2
+    },
+    {
+      name: 'google.firebase.com',
+      description: 'Подключить БД',
+      time: '23:00',
+      date: '2022-11-20',
+      progress: false,
+      files: null,
+      id: 3
     }
   ]);
 
-  const [maxId, setMaxId] = useState(3);
+  const [maxId, setMaxId] = useState(4);
 
   const deleteItem = (id) => {
     setData(data.filter(item => item.id !== id));
