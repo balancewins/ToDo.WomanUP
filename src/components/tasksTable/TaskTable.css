@@ -16,24 +16,30 @@
 
 .task-name {
     min-width: 225px;
+    max-width: 225px;
 }
 
 .task-description {
     min-width: 450px;
+    max-width: 450px;
 }
 
 .task-time {
     min-width: 125px;
+    max-width: 125px;
 }
 
 .task-date {
     min-width: 175px;
+    max-width: 175px;
 }
 
 .task-files {
     min-width: 150px;
+    max-width: 150px;
 }
 
 .task-progress {
     min-width: 200px;
+    max-width: 200px;
 }

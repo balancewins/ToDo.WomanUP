@@ -10,6 +10,17 @@ td div {
     border: none;
 }
 
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form textarea {
+    width: 375px;
+    max-width: 375px;
+}
+
 .overdue-task {
     background-color: salmon;
 }

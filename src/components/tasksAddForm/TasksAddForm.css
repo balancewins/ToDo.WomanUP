@@ -5,6 +5,7 @@
     border: 2px solid black;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     column-gap: 10px;
     min-width: 500px;
     max-width: 1000px;

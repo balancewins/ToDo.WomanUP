@@ -7,7 +7,7 @@ const DescriptionInput = ({description, onEdit, onEditProp, id}) => {
 
     return (
         <form data-toogle="description" onSubmit={onSubmit}>
-            <input type="text" name="description" defaultValue={description} />
+            <textarea type="text" name="description">{description}</textarea>
             <button type="submit">V</button>
         </form>
     )
