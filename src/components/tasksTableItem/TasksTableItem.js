@@ -10,7 +10,7 @@ import Progress from './tasksTableItemContent/Progress';
 import EditButton from './tasksTableItemContent/EditButton';
 import './TasksTableItem.css';
 
-const TasksTableItem = ({name, description, time, date, files, progress, onDelete, onToogleProp}) => {
+const TasksTableItem = ({name, description, time, date, files, progress, done, onDelete, onToogleProp}) => {
     const [edit, setEdit] = useState([
         {
             name: false,
@@ -30,8 +30,11 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
         files = 'Нет прикрепленных файлов';
     }
 
-    const checkDeadline = (time, date) => {
-        return (new Date(`${date}T${time}`) - new Date())
+    const checkDeadline = (time, date, doneTask) => {
+        if (doneTask) {
+            return ((new Date(`${date}T${time}`)) - (new Date(`${doneTask}`)))
+        }
+        return ((new Date(`${date}T${time}`)) - (new Date()))
     }
     
     let classNames = 'task';
@@ -39,8 +42,8 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
         classNames += ' overdue-task';
     }
 
-    if (progress && checkDeadline(time, date) > 0) {
-        classNames += ' done-task'
+    if (done && progress && checkDeadline(time, date, done) > 0) {
+        classNames += ' done-task';
     }
 
     const Name = ({edit}) => {
@@ -72,7 +75,8 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
             <td className='task-name'>
                 <div>
                     <Name edit={edit[0].name} />
-                    <EditButton toogle='name' 
+                    <EditButton toogle='name'
+                                edit={edit[0].name} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
@@ -80,6 +84,7 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
                 <div>
                     <Description edit={edit[0].description} />
                     <EditButton toogle='description' 
+                                edit={edit[0].description} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
@@ -87,6 +92,7 @@ const TasksTableItem = ({name, description, time, date, files, progress, onDelet
                 <div>
                     <Deadline edit={edit[0].deadline} />
                     <EditButton toogle='deadline' 
+                                edit={edit[0].deadline} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
