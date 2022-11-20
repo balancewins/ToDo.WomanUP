@@ -72,13 +72,20 @@ function App() {
     setData(newArr);
   }
 
+  const onEditProp = (id, prop, value) => {
+    const newArr = data.map(item => {
+      if (item.id === id) {
+        return {...item, [prop]: value}
+      }
+      return item;
+    })
+    setData(newArr);
+  }
+
   const onToogleProp = (id, prop) => {
     const newArr = data.map(item => {
       if (item.id === id) {
-        if (prop === 'progress') {
-          return {...item, done: service.getNowDate(), [prop]: !item[prop]}
-        }
-        return {...item, [prop]: !item[prop]}
+        return {...item, done: service.getNowDate(), [prop]: !item[prop]}
       }
       return item;
     })
@@ -96,7 +103,8 @@ function App() {
         <TasksTable 
           data={data}
           onDelete={deleteItem}
-          onToogleProp={onToogleProp} />
+          onToogleProp={onToogleProp}
+          onEditProp={onEditProp} />
       </main>
     </div>
   );

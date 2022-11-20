@@ -3,19 +3,22 @@ import NameSpan from './tasksTableItemContent/Name/NameSpan';
 import NameInput from './tasksTableItemContent/Name/NameInput';
 import DescriptionSpan from './tasksTableItemContent/Description/DescriptionSpan';
 import DescriptionInput from './tasksTableItemContent/Description/DescriptionInput';
-import DeadlineSpan from './tasksTableItemContent/Deadline/DeadlineSpan';
-import DeadlineInput from './tasksTableItemContent/Deadline/DeadlineInput';
+import TimeSpan from './tasksTableItemContent/Time/TimeSpan';
+import TimeInput from './tasksTableItemContent/Time/TimeInput';
+import DateSpan from './tasksTableItemContent/Date/DateSpan';
+import DateInput from './tasksTableItemContent/Date/DateInput';
 import Files from './tasksTableItemContent/Files';
 import Progress from './tasksTableItemContent/Progress';
 import EditButton from './tasksTableItemContent/EditButton';
 import './TasksTableItem.css';
 
-const TasksTableItem = ({name, description, time, date, files, progress, done, onDelete, onToogleProp}) => {
+const TasksTableItem = ({name, description, time, date, files, progress, done, onDelete, onToogleProp, onEditProp, id}) => {
     const [edit, setEdit] = useState([
         {
             name: false,
             description: false,
-            deadline: false
+            time: false,
+            date: false
         }
     ]);
 
@@ -49,7 +52,10 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
     const Name = ({edit}) => {
         const WhoAmI = edit;
         if (WhoAmI) {
-            return <NameInput name={name} />
+            return <NameInput name={name} 
+                              onEditProp={onEditProp}
+                              id={id}
+                              onEdit={onEdit} />
         }
         return <NameSpan name={name} />
     }
@@ -57,17 +63,34 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
     const Description = ({edit}) => {
         const WhoAmI = edit;
         if (WhoAmI) {
-            return <DescriptionInput description={description} />
+            return <DescriptionInput description={description}
+                                     onEditProp={onEditProp}
+                                     id={id}
+                                     onEdit={onEdit} />
         }
         return <DescriptionSpan description={description} />
     }
 
-    const Deadline = ({edit}) => {
+    const TimeDeadline = ({edit}) => {
         const WhoAmI = edit;
         if (WhoAmI) {
-            return <DeadlineInput deadline={[time, date]} />
+            return <TimeInput time={time}
+                              onEditProp={onEditProp}
+                              id={id}
+                              onEdit={onEdit} />
         }
-        return <DeadlineSpan deadline={[time, date]} />
+        return <TimeSpan time={time} />
+    }
+
+    const DateDeadline = ({edit}) => {
+        const WhoAmI = edit;
+        if (WhoAmI) {
+            return <DateInput date={date}
+                              onEditProp={onEditProp}
+                              id={id}
+                              onEdit={onEdit} />
+        }
+        return <DateSpan date={date} />
     }
 
     return (
@@ -88,11 +111,19 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
-            <td className='task-deadline'>
+            <td className='task-time'>
                 <div>
-                    <Deadline edit={edit[0].deadline} />
-                    <EditButton toogle='deadline' 
-                                edit={edit[0].deadline} 
+                    <TimeDeadline edit={edit[0].time} />
+                    <EditButton toogle='time' 
+                                edit={edit[0].time} 
+                                onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
+                </div>
+            </td>
+            <td className='task-date'>
+                <div>
+                    <DateDeadline edit={edit[0].date} />
+                    <EditButton toogle='date' 
+                                edit={edit[0].date} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>

@@ -22,8 +22,12 @@
     min-width: 450px;
 }
 
-.task-deadline {
-    min-width: 250px;
+.task-time {
+    min-width: 125px;
+}
+
+.task-date {
+    min-width: 175px;
 }
 
 .task-files {

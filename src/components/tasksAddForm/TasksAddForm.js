@@ -9,7 +9,7 @@ const TaskAddFormControlled = ({onAdd}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const {name, description, time, date, files} = e.target;
+        const {name, description, time, date} = e.target;
         // onAdd(name.value, description.value, deadline(time.value, date.value));
         onAdd(name.value, description.value, time.value, date.value)
         e.target.reset();
