@@ -3,10 +3,10 @@ import NameSpan from './tasksTableItemContent/Name/NameSpan';
 import NameInput from './tasksTableItemContent/Name/NameInput';
 import DescriptionSpan from './tasksTableItemContent/Description/DescriptionSpan';
 import DescriptionInput from './tasksTableItemContent/Description/DescriptionInput';
-import TimeSpan from './tasksTableItemContent/Time/TimeSpan';
-import TimeInput from './tasksTableItemContent/Time/TimeInput';
-import DateSpan from './tasksTableItemContent/Date/DateSpan';
-import DateInput from './tasksTableItemContent/Date/DateInput';
+import TimeDeadlineSpan from './tasksTableItemContent/TimeDeadline/TimeDeadlineSpan';
+import TimeDeadlineInput from './tasksTableItemContent/TimeDeadline/TimeDeadlineInput';
+import DateDeadlineSpan from './tasksTableItemContent/DateDeadline/DateDeadlineSpan';
+import DateDeadlineInput from './tasksTableItemContent/DateDeadline/DateDeadlineInput';
 import Files from './tasksTableItemContent/Files';
 import Progress from './tasksTableItemContent/Progress';
 import EditButton from './tasksTableItemContent/EditButton';
@@ -74,23 +74,23 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
     const TimeDeadline = ({edit}) => {
         const WhoAmI = edit;
         if (WhoAmI) {
-            return <TimeInput time={time}
+            return <TimeDeadlineInput time={time}
                               onEditProp={onEditProp}
                               id={id}
                               onEdit={onEdit} />
         }
-        return <TimeSpan time={time} />
+        return <TimeDeadlineSpan time={time} />
     }
 
     const DateDeadline = ({edit}) => {
         const WhoAmI = edit;
         if (WhoAmI) {
-            return <DateInput date={date}
+            return <DateDeadlineInput date={date}
                               onEditProp={onEditProp}
                               id={id}
                               onEdit={onEdit} />
         }
-        return <DateSpan date={date} />
+        return <DateDeadlineSpan date={date} />
     }
 
     return (
