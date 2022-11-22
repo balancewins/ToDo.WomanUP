@@ -2,15 +2,9 @@ import './TasksAddForm.css';
 
 const TaskAddFormControlled = ({onAdd}) => {
 
-    // const deadline = (time, date) => {
-    //     const reverseDate = date.split('-').reverse().join('.');
-    //     return `${time} ${reverseDate}`
-    // }
-
     const onSubmit = (e) => {
         e.preventDefault();
         const {name, description, time, date} = e.target;
-        // onAdd(name.value, description.value, deadline(time.value, date.value));
         onAdd(name.value, description.value, time.value, date.value)
         e.target.reset();
     }

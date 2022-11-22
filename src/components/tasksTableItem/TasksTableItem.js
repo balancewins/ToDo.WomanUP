@@ -13,26 +13,36 @@ import EditButton from './tasksTableItemContent/EditButton';
 import './TasksTableItem.css';
 
 const TasksTableItem = ({name, description, time, date, files, progress, done, onDelete, onToogleProp, onEditProp, id}) => {
-    const [edit, setEdit] = useState([
+    /** Стейт для хранения возможности редактирования конкретного поля */
+    const [edit, setEdit] = useState(
         {
             name: false,
             description: false,
             time: false,
             date: false
         }
-    ]);
-
-    const onEdit = (prop) => {
-        const newArr = edit.map(item => {
-            return {...item, [prop]: !item[prop]}
-        })
-        setEdit(newArr);
+    );
+    
+    /**
+     * Функция изменения состояния возможности редактирования
+     * @param {string} prop - ключ изменяемого свойства
+     */
+    const onEdit = (prop) => {   
+        setEdit({...edit, [prop]: !edit[prop]});
     }
 
+    /** Заглушка для неактивных на данных момент файлов */
     if (!files) {
         files = 'Нет прикрепленных файлов';
     }
 
+    /**
+     * Функция для отслеживания выполнения задачи в срок
+     * @param {string} time - заданное время завершения задачи
+     * @param {string} date - заданная дата завершения задачи
+     * @param {string} doneTask - время фактического выполнения задачи. В случае отсутствия такового, отслеживает текущие дату/время.
+     * @returns 
+     */
     const checkDeadline = (time, date, doneTask) => {
         if (doneTask) {
             return ((new Date(`${date}T${time}`)) - (new Date(`${doneTask}`)))
@@ -40,6 +50,7 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
         return ((new Date(`${date}T${time}`)) - (new Date()))
     }
     
+    /** Проверки на выполнение задач в срок и добавление соответствующих классов */
     let classNames = 'task';
     if (checkDeadline(time, date) < 0) {
         classNames += ' overdue-task';
@@ -49,6 +60,7 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
         classNames += ' done-task';
     }
 
+    /** Функции для условного рендеринга в зависимости от положения связанного ключа стейта edit */
     const Name = ({edit}) => {
         const WhoAmI = edit;
         if (WhoAmI) {
@@ -97,33 +109,33 @@ const TasksTableItem = ({name, description, time, date, files, progress, done, o
         <tr className={classNames}>
             <td className='task-name'>
                 <div>
-                    <Name edit={edit[0].name} />
+                    <Name edit={edit.name} />
                     <EditButton toogle='name'
-                                edit={edit[0].name} 
+                                edit={edit.name} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
             <td className='task-description'>
                 <div>
-                    <Description edit={edit[0].description} />
+                    <Description edit={edit.description} />
                     <EditButton toogle='description' 
-                                edit={edit[0].description} 
+                                edit={edit.description} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
             <td className='task-time'>
                 <div>
-                    <TimeDeadline edit={edit[0].time} />
+                    <TimeDeadline edit={edit.time} />
                     <EditButton toogle='time' 
-                                edit={edit[0].time} 
+                                edit={edit.time} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>
             <td className='task-date'>
                 <div>
-                    <DateDeadline edit={edit[0].date} />
+                    <DateDeadline edit={edit.date} />
                     <EditButton toogle='date' 
-                                edit={edit[0].date} 
+                                edit={edit.date} 
                                 onEdit={(e) => onEdit(e.currentTarget.getAttribute('data-toogle'))} />
                 </div>
             </td>

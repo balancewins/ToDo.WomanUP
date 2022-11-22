@@ -1,8 +1,10 @@
 class Services {
+    /** Функция для отображения пользователю текущей даты в формате dd.mm.yyyy */
     reverseDate = (date) => {
         return date.split('-').reverse().join('.');
     }
 
+    /** Функиця для сохранения даты в формате, корректно воспринимающимся new Date(arg) */
     getNowDate = () => {
         const now = new Date();
         const year = now.getFullYear();

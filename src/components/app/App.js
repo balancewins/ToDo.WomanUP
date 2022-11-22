@@ -3,60 +3,36 @@ import Header from '../headerLogo/HeaderLogo';
 import Services from '../services/Services';
 import TasksAddForm from '../tasksAddForm/TasksAddForm';
 import TasksTable from '../tasksTable/TaskTable';
+import DB from '../db/DB';
 import './App.css';
 
+/** Создание копии класса со вспомогательными функциями. За пределами App() для того, чтоб не при каждом рендере не создавалась новая копия */
+const service = new Services();
+
 function App() {
-  const [data, setData] = useState([
-    {
-      name: 'Тестовое задание ',
-      description: 'Сделать ToDoList согласно ТЗ',
-      time: '18:00',
-      date: '2022-11-19',
-      progress: false,
-      files: null,
-      id: 1
-    },
-    {
-      name: 'Редактируемые поля',
-      description: 'Разобраться как сделать редактируемые поля',
-      time: '18:00',
-      date: '2022-11-20',
-      progress: true,
-      done: '2022-11-20T17:10',
-      files: null,
-      id: 2
-    },
-    {
-      name: 'Проверка выполнения задачи в срок',
-      description: 'Добавить скрытое свойство, отслеживающее дату и время выполнения задачи',
-      time: '23:00',
-      date: '2022-11-20',
-      progress: true,
-      done: '2022-11-20T21:20',
-      files: null,
-      id: 3
-    },
-    {
-      name: 'google.firebase.com',
-      description: 'Подключить БД',
-      time: '23:00',
-      date: '2022-11-20',
-      progress: false,
-      files: null,
-      id: 4
-    }
-  ]);
+  /** Стэйт для хранения списка задач */
+  const [data, setData] = useState(DB);
 
-  const [maxId, setMaxId] = useState(5);
+  let maxId = 4;
 
-  const service = new Services();
-
+  /** 
+   * Функция удаления задачи
+   * @param {number} id - id удаляемой задачи 
+   */
   const deleteItem = (id) => {
     setData(data.filter(item => item.id !== id));
   }
 
+  /** Функция добавления задачи
+   * Увеличивает счётчик maxId во избежание пересечения id задач
+   * @param {string} name - заголовок задачи
+   * @param {string} description - описание задачи
+   * @param {string} time - время завершения задачи
+   * @param {string} date - дата завершения задачи
+   * @param {null} files - файлы, прикрепленные к задаче. На данный момент не активны, планировалось осуществить возможность прикрепления файлов при подключении firebase 
+   */
   const addItem = (name, description, time, date, files) => {
-    setMaxId(maxId + 1);
+    maxId += 1;
     const newItem = {
       name: name,
       description: description,
@@ -72,6 +48,12 @@ function App() {
     setData(newArr);
   }
 
+  /**
+   * Функция изменения заголовка, описания, времени/даты завершения задачи.
+   * @param {number} id - id изменяемой задачи
+   * @param {string} prop - ключ изменяемого свойства
+   * @param {string} value - изменяемое значение свойства
+   */
   const onEditProp = (id, prop, value) => {
     const newArr = data.map(item => {
       if (item.id === id) {
@@ -82,6 +64,11 @@ function App() {
     setData(newArr);
   }
 
+  /**
+   * Функция изменения прогресса выполнения задачи. Изменяемое значение булевое.
+   * @param {number} id - id изменяемой задачи
+   * @param {string} prop - ключ изменяемого свойства
+   */
   const onToogleProp = (id, prop) => {
     const newArr = data.map(item => {
       if (item.id === id) {

@@ -10,7 +10,7 @@ const TaskTable = ({data, onDelete, onToogleProp, onEditProp}) => {
                 {...itemProps}
                 id={id}
                 onDelete={() => onDelete(id)}
-                onToogleProp={(e) => onToogleProp(id, e.currentTarget.getAttribute('data-toogle'))}
+                onToogleProp={(e) => onToogleProp(id, e.currentTarget.getAttribute('data-toogle'))} 
                 onEditProp={onEditProp} />
         );
     });
